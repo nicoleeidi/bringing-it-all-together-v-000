@@ -23,7 +23,9 @@ class Dog
         DB[:conn].execute("SELECT * FROM dogs WHERE name= ? LIMIT 1", name).map do |row|
           self.new_from_db(row)
         end.first
-        
+
       end
-  end
+    def update
+      DB[:conn].execute("UPDATE dogs SET name=? WHERE id=?"self.name,self.id)
+    end 
 end
