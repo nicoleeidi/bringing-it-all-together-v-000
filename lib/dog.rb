@@ -6,7 +6,7 @@ class Dog
     @breed=breed
   end
   def self.create_table
-    DB[:conn].execute("CREATE TABLE dogs (id INTEGER PRIMARY KEY, name TEXT, breed TEXT)")
+    DB[:conn].execute("CREATE TABLE IF NOT EXISTS dogs (id INTEGER PRIMARY KEY, name TEXT, breed TEXT)")
   end
   def self.drop_table
     DB[:conn].execute("DROP TABLE dogs")
@@ -35,6 +35,7 @@ class Dog
         DB[:conn].execute("INSERT INTO dogs (name,breed) VALUES (?,?)",self.name,self.breed)
       end
       @id=DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
-    end
-
+    end 
+    
 end
+
