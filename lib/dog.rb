@@ -3,10 +3,10 @@ class Dog
   def initialize (id:nil, name:, breed:)
     @id=id
     @name=name
-    @breed=breed 
+    @breed=breed
   end
   def self.create_table
-    
+    DB[:conn].execute("CREATE TABLE dogs")
   end
   def self.drop_table
   end
