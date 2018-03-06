@@ -37,7 +37,7 @@ class Dog
       @id=DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
       self
     end
-    def self.create(name,breed)
+    def self.create(name:,breed:)
       new_dog=self.new(name,breed)
       new_dog.save
       new_dog
@@ -47,6 +47,14 @@ class Dog
         self.new_from_db(row)
       end.first
     end
-    def self.find_or_create_by
-    end
+    def self.find_or_create_by(name:, breed:)
+  song = DB[:conn].execute("SELECT * FROM songs WHERE name = ? AND album = ?", name, album)
+  if !song.empty?
+    song_data = song[0]
+    song = Song.new(song_data[0], song_data[1], song_data[2])
+  else
+    song = self.create(name: name, album: album)
+  end
+  song
+end 
 end
