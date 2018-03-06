@@ -37,13 +37,16 @@ class Dog
       @id=DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
       self
     end
-    def create(name,breed)
-      new_dog.self.new(name,breed)
+    def self.create(name,breed)
+      new_dog=self.new(name,breed)
       new_dog.save
       new_dog
-    end 
+    end
     def self.find_by_id
-    end 
+      DB[:conn].execute("SELECT * FROM dogs WHERE id= ? LIMIT 1", name).map do |row|
+        self.new_from_db(row)
+      end.first
+    end
     def self.find_or_create_by
-    end 
+    end
 end
