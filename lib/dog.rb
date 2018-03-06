@@ -19,6 +19,12 @@ class Dog
       new_dog
       # create a new Student object given a row from the database
     end
-  def self.find_by_name
-  end 
+    def self.find_by_name(name)
+        DB[:conn].execute("SELECT * FROM dogs WHERE name= ? LIMIT 1", name).map do |row|
+          self.new_from_db(row)
+        end.first
+        # find the student in the database given a name
+        # return a new instance of the Student class
+      end
+  end
 end
