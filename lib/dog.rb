@@ -17,6 +17,7 @@ class Dog
       new_dog.name=row[1]
       new_dog.breed=row[2]
       new_dog
+      binding.pry
       # create a new Student object given a row from the database
     end
     def self.find_by_name(name)
